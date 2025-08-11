@@ -10,7 +10,7 @@ class HuggingfaceAgent:
     )
 
     def __init__(self, model_name= "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B", 
-                 prompt_template_filename="TEMPLATE.MD", 
+                 prompt_template_filename="./llm_baselines/TEMPLATE.MD", 
                  available_actions=None):
         
         self.available_actions = available_actions or self.default_available_actions
@@ -27,7 +27,7 @@ class HuggingfaceAgent:
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
             device_map="auto",
-            load_in_8bit=True  
+            # load_in_8bit=True  
         )
         
         self.generator = pipeline(
@@ -54,7 +54,8 @@ class HuggingfaceAgent:
        # print(prompt)
 
 
-        generation = self.generator(prompt, max_new_tokens=1024, do_sample=True, temperature=0.7)
+        # generation = self.generator(prompt, max_new_tokens=1024, do_sample=True, temperature=0.7)
+        generation = self.generator(prompt, max_new_tokens=10, do_sample=True, temperature=0.7)
         raw_answer = generation[0]['generated_text']
         llm_answer = raw_answer.strip().replace("\n", " ")
 

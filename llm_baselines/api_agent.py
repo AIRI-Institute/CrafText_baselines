@@ -1,6 +1,6 @@
 from jinja2 import Template
 
-from baselines.api_models.api_providers import APIProvider
+from api_providers import APIProvider
 
 
 class ApiAgent:

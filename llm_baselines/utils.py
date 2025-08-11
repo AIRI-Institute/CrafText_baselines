@@ -1,18 +1,12 @@
-import os
 import jax.numpy as jnp
 from craftax.craftax.constants import MAX_OBS_DIM
 from craftax.craftax_classic.constants import OBS_DIM, BlockType
 from tabulate import tabulate
 
-from baselines.api_models.api_agent import ApiAgent
-
 import jax
 
 # from craftax.craftax.constants import *
-from craftax.craftax_env import make_craftax_env_from_name
 from craftax.craftax_classic.envs.craftax_state import Inventory
-
-from craftext.craftext_wrapper import InstructionWrapper
 
 def render_craftax_text(state) -> str:
     text_obs = ""
