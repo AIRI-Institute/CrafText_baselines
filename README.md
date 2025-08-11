@@ -30,7 +30,8 @@ Below are the available baselines with example commands to launch training runs.
 python3 baselines/ppo_conv_rnn.py \
     --craftext_settings easy_train \
     --env_name "Craftax-Classic-Pixels-v1" \
-    --num_envs 1024
+    --num_envs 1024 \
+    --total_timesteps 6000000000 \
 ```
 
 ### 🟢 PPO-T+ Baseline
@@ -41,7 +42,7 @@ python3 baselines/ppo_conv_rnn.py \
     --env_name "Craftax-Classic-Pixels-v1" \
     --num_envs 1024 \
     --total_timesteps 6000000000 \
-    --use_plans True
+    --use_plans True \
 ```
 
 
@@ -52,7 +53,8 @@ python3 baselines/ppo_conv_rnn.py \
 python3 baselines/ppo_filmed.py \
     --craftext_settings easy_train \
     --env_name "Craftax-Classic-Pixels-v1" \
-    --num_envs 1024
+    --num_envs 1024 \
+    --total_timesteps 6000000000 \
 ```
 
 
@@ -61,8 +63,8 @@ python3 baselines/ppo_filmed.py \
 
 ```bash
 python llm_baselines/run.py \
-  --model_source api \
-  --model_name gpt-4 \
-  --output_file gpt4_results.txt
+    --model_source huggingface \
+    --model_name Qwen/Qwen2.5-0.5B \
+    --output_file qwen_results.txt
 ```
 

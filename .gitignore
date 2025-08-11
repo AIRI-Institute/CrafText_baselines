@@ -1,0 +1,9 @@
+wandb
+__pycache__
+xet
+.locks
+models--distilbert-base-uncased
+experiments
+runs
+hub
+scripts
