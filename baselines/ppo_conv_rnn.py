@@ -18,7 +18,8 @@ from flax.training import (
     orbax_utils,
 )
 from flax.training.train_state import TrainState
-from flax.metrics.tensorboard import SummaryWriter
+from clu import metric_writers
+
 from logz.batch_logging import batch_log_tb, create_log_dict
 from orbax.checkpoint import (
     CheckpointManager,
@@ -436,7 +437,7 @@ def run_ppo(config):
             run_name = f"{config['WANDB_RUN']}"
 
         log_dir = os.path.join("runs", run_name)
-        writer = SummaryWriter(log_dir=log_dir) # Создаем writer здесь
+        writer = metric_writers.create_default_writer(logdir=log_dir) 
         logger.info(f"TensorBoard logs will be saved to: {log_dir}")
 
     checkpoint_dir = os.path.abspath(
@@ -531,7 +532,7 @@ def run_ppo(config):
         def log_inference_to_tensorboard(prefix, data, step):
             if writer:
                 for task_name, value in data.items():
-                    writer.scalar(f"{prefix}/{task_name}", value, step)
+                    writer.write_scalars(step, {f"{prefix}/{task_name}": value})
                 logger.info(f"Logged inference '{prefix}' metrics at step {step}")
 
         # INFERENCE ON TRAIN
@@ -571,7 +572,7 @@ def run_ppo(config):
             log_inference_to_tensorboard("test_paraphrases", mean_by_tasks, config["CURRENT_RESTART"])
 
     if writer:
-        writer.close()
+        writer.flush()
     print("All training iterations completed.")
 
 

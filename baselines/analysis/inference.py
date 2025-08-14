@@ -211,7 +211,7 @@ class Experiment:
         actions_count = 17 if "Classic" in env_name else 43
         network_class = AC_IMG_conv_TXT_mlp_film
         network = network_class(
-            actions_count + 1, layer_width=self.config.layer_size
+            actions_count, layer_width=self.config.layer_size
         )
 
         if self.config.use_plans:

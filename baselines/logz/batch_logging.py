@@ -90,6 +90,6 @@ def batch_log_tb(update_step, log, config, writer):
                     value_mean = value
                 
                 if not np.isnan(value_mean):
-                    writer.scalar(f"train_live/{key}", value_mean, update_step)
+                    writer.write_scalars(update_step, {f"train_live/{key}": value_mean})
         
         del batch_logs[update_step]
